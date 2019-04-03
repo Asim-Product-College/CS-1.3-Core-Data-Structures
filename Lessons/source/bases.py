@@ -17,13 +17,28 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # TODO: Decode digits from binary (base 2)
-    # ...
-    # TODO: Decode digits from hexadecimal (base 16)
-    # ...
-    # TODO: Decode digits from any base (2 up to 36)
-    # ...
+    result = 0
+    power = 0
+    
+    letter_mapper = {
+        'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14,
+        'F': 15, 'G': 16, 'H': 17, 'I': 18, 'J': 19,
+        'K': 20, 'L': 21, 'M': 22, 'N': 23, 'O': 24,
+        'P': 25, 'Q': 26, 'R': 27, 'S': 28, 'T': 29,
+        'U': 30, 'V': 31, 'W': 32, 'X': 33, 'Y': 34, 'Z': 35
+    }
 
+    for i in reversed(digits):
+        if i.isalpha():
+            result += letter_mapper[i.upper()] * (base ** power)
+        else:       
+            result += int(i) * (base ** power)
+        power += 1
+    
+    # Input: '26', 16
+    # Expected output
+
+    return result
 
 def encode(number, base):
     """Encode given number in base 10 to digits in given base.
@@ -35,11 +50,15 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
-    # ...
+    
+    if base == 2:
+        pass
     # TODO: Encode number in hexadecimal (base 16)
-    # ...
+    if base == 16:
+        pass
     # TODO: Encode number in any base (2 up to 36)
-    # ...
+    if base == 1:
+        pass
 
 
 def convert(digits, base1, base2):
