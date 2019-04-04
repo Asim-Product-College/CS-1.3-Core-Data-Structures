@@ -1,3 +1,4 @@
+# Shoutout to  Sukhrobjon Golibboev (@Sukhrobjon) and Zurich! for help in walking me through the decode algorithm.
 #!python
 
 import string
@@ -8,7 +9,6 @@ import string
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 # string.printable is digits + ascii_letters + punctuation + whitespace
-
 
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.
@@ -34,9 +34,6 @@ def decode(digits, base):
         else:       
             result += int(i) * (base ** power)
         power += 1
-    
-    # Input: '26', 16
-    # Expected output
 
     return result
 
@@ -49,17 +46,49 @@ def encode(number, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    # TODO: Encode number in binary (base 2)
-    
-    if base == 2:
-        pass
-    # TODO: Encode number in hexadecimal (base 16)
-    if base == 16:
-        pass
-    # TODO: Encode number in any base (2 up to 36)
-    if base == 1:
-        pass
+    divisor = base
 
+    dividend = number
+    quotient = 1
+    result = ''
+    magicAsciiNumber = 87
+
+    while quotient != 0:
+        if dividend < base:
+            remainder = dividend
+            quotient = 0
+        else:
+            remainder = dividend % base
+            dividend = (dividend - remainder) // base
+
+        if remainder > 9:
+            # asci table lower case, avoid magic numbers.
+            remainder = chr(remainder + magicAsciiNumber)
+
+        result += str(remainder)
+
+    return result[::-1]
+
+
+    # while dividend > 1:
+    #     print('While Loop Iteration')
+    #     divs = divmod(dividend, divisor)
+    #     print('divs:', divs)
+    #     # Use the remainder to index the desired corresponding character
+    #     result += divs[1]
+    #     print('result:', result)
+       
+    
+    # return result
+    # return result[::-1]
+    #     if dividend < divisor:
+    #         remainder = dividend
+    #         quotient = 0
+    #     else:
+    #         remainder = dividend % divisor
+    #         dividend = (dividend - remainder) // divisor # update the dividend until its < divisor
+
+    # Given a number
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
@@ -97,4 +126,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    print(encode(100, 16))
