@@ -1,4 +1,3 @@
-#!python
 
 def factorial(n):
     """factorial(n) returns the product of the integers 1 through n for n >= 0,
@@ -13,6 +12,8 @@ def factorial(n):
 
 
 def factorial_iterative(n):
+    if n == 0 or n == 1:
+        return 1
     result = n
     for i in range(n-1, 1, -1):
         result *= i
@@ -40,5 +41,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    print(factorial(5))
+    main()
