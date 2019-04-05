@@ -54,23 +54,19 @@ def binary_search_iterative(array, item):
     # return False # or raise error
 
 
-def binary_search_recursive(array, item, left=0, right=None):
-    print('here now')
-    if right is None:
-        right = len(array) - 1
-    if left > right: # Empty array edge case
+def binary_search_recursive(array, item):
+    print('array:', array)
+    if len(array) == 0:
         return None
-    print('left:', left, 'right:', right, 'item:', item)
-    mid_index = (right - left) // 2
-    print('mix_index:', mid_index)
+    mid_index = len(array) // 2
     mid = array[mid_index]
-    
+    print('mix_index:', mid_index)
+    print('middle item:', mid)
     if mid == item: # Base Case
         print('mid == item!')
         return mid_index
     if mid < item:
-        print('mid < item :( ')
-        # return binary_search_recursive(array, item, mid_index+1, right)
-    # mid > item
-    print('mid > item :( ')
-    # return binary_search_recursive(array, item, left, mid_index-1)
+        print('mid < item :(')
+        return binary_search_recursive(array[mid_index+1:], item)
+    print('mid > item :(') # mid > item
+    return binary_search_recursive(array[:mid_index], item)
