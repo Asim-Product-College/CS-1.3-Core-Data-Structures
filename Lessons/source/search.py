@@ -64,9 +64,11 @@ def binary_search_recursive(array, item):
     print('middle item:', mid)
     if mid == item: # Base Case
         print('mid == item!')
+        print('mid:', mid)
+        print('mid_index:', mid_index)
         return mid_index
-    if mid < item:
-        print('mid < item :(')
-        return binary_search_recursive(array[mid_index+1:], item)
-    print('mid > item :(') # mid > item
-    return binary_search_recursive(array[:mid_index], item)
+    if mid > item:
+        print('mid > item :(')
+        return binary_search_recursive(array[:mid_index], item)
+    print('mid < item :(') # mid < item
+    return binary_search_recursive(array[mid_index+1:], item)
