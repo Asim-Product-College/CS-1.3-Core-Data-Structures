@@ -8,28 +8,72 @@ import string
 
 
 def is_palindrome(text):
-    """A string of characters is a palindrome if it reads the same forwards and
+    """A string of characters is a palindrome ife it reads the sam forwards and
     backwards, ignoring punctuation, whitespace, and letter casing."""
-    # implement is_palindrome_iterative and is_palindrome_recursive below, then
-    # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    return is_palindrome_iterative(text)
-    # return is_palindrome_recursive(text)
+    return is_palindrome_recursive(text)
 
 
 def is_palindrome_iterative(text):
-    # TODO: implement the is_palindrome function iteratively here
-    pass
-    # once implemented, change is_palindrome to call is_palindrome_iterative
-    # to verify that your iterative implementation passes all tests
+    """
+        is_palindrome_iterative() checks to see if a given text is a palindrome
+        meaning its characters flipped would be the same word from the beginning.
+
+        Args:       text (string)
+        Returns:    is_palindrome (bool)
+
+        Time:       O(n)
+        Space:       O(n)
+    """
+    
+    source = text.lower()   # Time: O(n), Space: O(n) 🏃‍
+    # left & right index of source
+    left = 0
+    right = len(source) - 1    # O(1) 💨
+
+    while left <= right:    # while left 🛑✋'s before passing right
+        if source[left] != source[right]:
+            return False    # 😭
+        left += 1
+        right -= 1
+
+    is_palindrome = True    # 🤩
+
+    return is_palindrome
+
+    # Easy Way 😛
+    # rvs_text = text[::-1]
+    # if text == rvs_text:
+    #     return True
+    # else:
+    #     return False
 
 
 def is_palindrome_recursive(text, left=None, right=None):
-    # TODO: implement the is_palindrome function recursively here
-    pass
-    # once implemented, change is_palindrome to call is_palindrome_recursive
-    # to verify that your iterative implementation passes all tests
+    """
+        is_palindrome_recursive() checks to see if a given text is a palindrome
+        meaning its characters flipped would be the same word from the beginning.
 
+        Args:       text (string)
+        Returns:    is_palindrome (bool)
+
+        Time:       O(n)
+        Space:      O(1)
+    """
+    # source = text.lower()   # When doing this recursively this operation is called each time
+    if left == None and right == None:
+        left = 0
+        right = len(text) - 1
+    if left >= right: # Base Case
+        return True
+    if text[left] in string.punctuation or text[left] == ' ':
+        return is_palindrome_recursive(text, left + 1, right)
+    if text[right] in string.punctuation or text[right] == ' ':
+        return is_palindrome_recursive(text, left, right - 1)
+    if text[left].lower() == text[right].lower():
+        return is_palindrome_recursive(text, left + 1, right - 1)
+
+    return False
 
 def main():
     import sys
@@ -46,4 +90,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    print(is_palindrome_recursive('B b'))
