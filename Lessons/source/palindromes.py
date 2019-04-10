@@ -90,5 +90,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    print(is_palindrome_recursive('B b'))
+    main()
